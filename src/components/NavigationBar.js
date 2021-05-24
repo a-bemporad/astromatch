@@ -16,6 +16,7 @@ const NavigationBar = () => {
   const [matches, setMatches] = useState([]);
   const toast = useToast();
   const [profile, setProfile] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const getProfileToChoose = () => {
     axios
       .get(
@@ -23,6 +24,7 @@ const NavigationBar = () => {
       )
       .then((response) => {
         setProfile(response.data.profile);
+        setIsLoading(false);
       })
       .catch((error) => {
         toast({
@@ -82,6 +84,7 @@ const NavigationBar = () => {
               profile={profile}
               getProfileToChoose={getProfileToChoose}
               clearMatches={clearMatches}
+              isLoading={isLoading}
             />
           </TabPanel>
           <TabPanel h="100%" p="0">
